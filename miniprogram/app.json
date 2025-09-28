@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/kana-quiz/index",
+    "pages/shadowing/index",
+    "pages/result/index",
+    "pages/settings/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "Kana Coach",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundTextStyle": "light"
+  }
+}

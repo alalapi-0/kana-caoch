@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "五十音测验",
+  "usingComponents": {
+    "star-rating": "/components/star-rating/index"
+  }
+}

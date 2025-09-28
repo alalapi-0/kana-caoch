@@ -1,0 +1,27 @@
+[
+  {
+    "jp": "おはようございます。",
+    "romaji": "ohayou gozaimasu.",
+    "hint": "早上的问候"
+  },
+  {
+    "jp": "これはペンです。",
+    "romaji": "kore wa pen desu.",
+    "hint": "简单陈述"
+  },
+  {
+    "jp": "すみません、駅はどこですか。",
+    "romaji": "sumimasen, eki wa doko desu ka.",
+    "hint": "询问车站"
+  },
+  {
+    "jp": "水を一杯ください。",
+    "romaji": "mizu o ippai kudasai.",
+    "hint": "点餐用语"
+  },
+  {
+    "jp": "今日はいい天気ですね。",
+    "romaji": "kyou wa ii tenki desu ne.",
+    "hint": "聊天开场"
+  }
+]

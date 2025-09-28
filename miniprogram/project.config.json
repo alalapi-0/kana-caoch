@@ -1,0 +1,11 @@
+{
+  "appid": "touristappid",
+  "projectname": "kana-coach",
+  "miniprogramRoot": "./",
+  "compileType": "miniprogram",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true
+  }
+}

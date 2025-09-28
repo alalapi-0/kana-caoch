@@ -1,0 +1,11 @@
+<view class="container">
+  <view class="title">Kana Coach</view>
+  <view class="cards">
+    <block wx:for="{{cards}}" wx:key="title">
+      <view class="card" data-target="{{item.target}}" bindtap="navigate">
+        <text class="card-title">{{item.title}}</text>
+        <text class="card-desc">{{item.description}}</text>
+      </view>
+    </block>
+  </view>
+</view>

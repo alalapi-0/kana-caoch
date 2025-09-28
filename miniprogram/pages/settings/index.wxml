@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="section">
+    <text class="label">播音人</text>
+    <picker mode="selector" range="{{voiceOptions}}" value="{{voiceIndex}}" bindchange="onVoiceChange">
+      <view class="picker-value">{{voiceOptions[voiceIndex]}}</view>
+    </picker>
+  </view>
+  <view class="section">
+    <text class="label">语速</text>
+    <picker mode="selector" range="{{speedOptions}}" value="{{speedIndex}}" bindchange="onSpeedChange">
+      <view class="picker-value">{{speedOptions[speedIndex]}}</view>
+    </picker>
+  </view>
+  <view class="tip">* 设置暂未生效，后续版本将与云端联动。</view>
+</view>

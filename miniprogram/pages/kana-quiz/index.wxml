@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="question" wx:if="{{current}}">
+    <text class="kana">{{current.kana}}</text>
+    <text class="progress">{{index + 1}} / {{total}}</text>
+  </view>
+  <input class="answer" placeholder="输入罗马音" value="{{userInput}}" bindinput="onInput" wx:if="{{current}}" />
+  <button type="primary" bindtap="submit" wx:if="{{current}}">提交</button>
+  <view class="complete" wx:else>测验结束，查看结果页了解详情。</view>
+  <view class="history" wx:if="{{results.length}}">
+    <view class="history-title">历史记录</view>
+    <block wx:for="{{results}}" wx:key="kana">
+      <view class="history-item">
+        <text>{{item.kana}} → {{item.romaji}}</text>
+        <text>你的输入：{{item.user}}</text>
+        <star-rating stars="{{item.stars}}"></star-rating>
+      </view>
+    </block>
+  </view>
+</view>

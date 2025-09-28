@@ -1,0 +1,15 @@
+{
+  "name": "kana-coach",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Monorepo for Kana Coach WeChat mini program and mock server",
+  "scripts": {
+    "bootstrap": "pnpm -w install",
+    "dev:server": "pnpm -C server dev",
+    "test": "pnpm -C server test"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5"
+  }
+}

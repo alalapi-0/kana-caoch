@@ -1,0 +1,5 @@
+<view class="stars">
+  <block wx:for="{{range()}}" wx:for-item="item" wx:key="item">
+    <text class="star {{item <= stars ? 'filled' : ''}}">★</text>
+  </block>
+</view>

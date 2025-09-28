@@ -1,0 +1,9 @@
+{
+  "desc": "Kana Coach sitemap",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+<view class="container">
+  <view wx:if="{{type === 'kana'}}">
+    <view class="title">测验结果</view>
+    <block wx:for="{{kanaResults}}" wx:key="kana">
+      <view class="item">
+        <text>{{item.kana}} → {{item.romaji}}</text>
+        <text>你的输入：{{item.user}}</text>
+        <text>准确率：{{(item.accuracy * 100).toFixed(0)}}%</text>
+        <star-rating stars="{{item.stars}}"></star-rating>
+      </view>
+    </block>
+    <view class="empty" wx:if="{{!kanaResults.length}}">暂无测验记录，请先完成练习。</view>
+  </view>
+  <view wx:elif="{{type === 'shadowing'}}">
+    <view class="title">跟读成绩</view>
+    <view class="item" wx:if="{{shadowingResult}}">
+      <text>识别文本：{{shadowingResult.text}}</text>
+      <text>得分：{{(shadowingResult.score * 100).toFixed(0)}}%</text>
+      <star-rating stars="{{shadowingResult.stars}}"></star-rating>
+    </view>
+    <view class="empty" wx:else>暂无记录，请先完成跟读训练。</view>
+  </view>
+  <button bindtap="goHome">返回首页</button>
+</view>

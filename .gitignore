@@ -1,0 +1,13 @@
+node_modules/
+pnpm-lock.yaml
+.DS_Store
+.env
+*.log
+dist/
+.vscode/
+.idea/
+server/.turbo/
+server/dist/
+miniprogram/.miniprogramrc
+miniprogram/miniprogram_npm/
+miniprogram/node_modules/

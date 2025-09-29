@@ -1,3 +1,7 @@
+/**
+ * @file ESLint 配置，统一前后端 TypeScript/JavaScript 的代码风格校验。
+ */
+
 module.exports = {
   root: true,
   env: {

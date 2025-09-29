@@ -1,10 +1,11 @@
+<!-- 结果页：根据不同类型展示测验或跟读成绩 -->
 <view class="container">
   <view wx:if="{{type === 'kana'}}">
     <view class="title">测验结果</view>
     <block wx:for="{{kanaResults}}" wx:key="kana">
       <view class="item">
         <text>{{item.kana}} → {{item.romaji}}</text>
-        <text>你的输入：{{item.user}}</text>
+        <text>你的输入：{{item.user || '（未填写）'}}</text>
         <text>准确率：{{(item.accuracy * 100).toFixed(0)}}%</text>
         <star-rating stars="{{item.stars}}"></star-rating>
       </view>
@@ -17,6 +18,7 @@
       <text>识别文本：{{shadowingResult.text}}</text>
       <text>得分：{{(shadowingResult.score * 100).toFixed(0)}}%</text>
       <star-rating stars="{{shadowingResult.stars}}"></star-rating>
+      <text wx:if="{{shadowingResult.confidence}}">置信度：{{(shadowingResult.confidence * 100).toFixed(0)}}%</text>
     </view>
     <view class="empty" wx:else>暂无记录，请先完成跟读训练。</view>
   </view>

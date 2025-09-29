@@ -1,3 +1,4 @@
+<!-- 设置页：提供语速、播音人占位选择与服务端地址配置 -->
 <view class="container">
   <view class="section">
     <text class="label">播音人</text>
@@ -11,5 +12,10 @@
       <view class="picker-value">{{speedOptions[speedIndex]}}</view>
     </picker>
   </view>
-  <view class="tip">* 设置暂未生效，后续版本将与云端联动。</view>
+  <view class="section">
+    <text class="label">后端地址</text>
+    <input class="input" value="{{baseUrl}}" bindinput="onBaseUrlInput" placeholder="例如 http://localhost:3000" />
+    <button size="mini" bindtap="saveBaseUrl">保存地址</button>
+  </view>
+  <view class="tip">* 语速与播音人设置暂未与云端联动，后续版本将接入腾讯云 TTS。</view>
 </view>

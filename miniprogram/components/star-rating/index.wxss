@@ -1,3 +1,4 @@
+/* 星级组件样式：通过颜色区分选中与未选中状态 */
 .stars {
   display: flex;
   gap: 8rpx;

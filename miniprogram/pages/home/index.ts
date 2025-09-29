@@ -1,4 +1,18 @@
-Page({
+/**
+ * @file 首页，展示核心功能入口卡片。
+ */
+
+interface CardItem {
+  title: string;
+  description: string;
+  target: string;
+}
+
+interface HomePageData {
+  cards: CardItem[];
+}
+
+Page<HomePageData, WechatMiniprogram.Page.CustomOptions>({
   data: {
     cards: [
       {
@@ -13,10 +27,16 @@ Page({
       },
     ],
   },
+  /**
+   * 点击卡片跳转到对应页面。
+   * @param event 点击事件。
+   */
   navigate(event: WechatMiniprogram.TouchEvent) {
-    const target = event.currentTarget.dataset.target;
+    const target = event.currentTarget.dataset.target as string | undefined;
     if (target) {
       wx.navigateTo({ url: target });
+    } else {
+      wx.showToast({ title: '暂未开放', icon: 'none' });
     }
   },
 });

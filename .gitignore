@@ -1,13 +1,66 @@
+# 根目录 .gitignore：排除依赖、构建产物以及潜在的二进制文件，防止误提交
 node_modules/
+**/node_modules/
 pnpm-lock.yaml
-.DS_Store
-.env
-*.log
-dist/
+package-lock.json
+yarn.lock
+
+# TypeScript/构建输出
+**/dist/
+**/build/
+**/.tmp/
+**/.cache/
+**/.turbo/
+**/coverage/
+
+# 编辑器与系统文件
 .vscode/
 .idea/
-server/.turbo/
-server/dist/
-miniprogram/.miniprogramrc
+.DS_Store
+Thumbs.db
+
+# 环境配置与日志
+.env
+.env.local
+.env.*.local
+*.log
+
+# 微信开发者工具产生的本地配置与缓存
 miniprogram/miniprogram_npm/
-miniprogram/node_modules/
+miniprogram/.miniprogramrc
+miniprogram/project.private.config.json
+miniprogram/weapp-dist/
+
+# 媒体与二进制占位符（确保仓库全文本）
+*.mp3
+*.wav
+*.aac
+*.ogg
+*.flac
+*.m4a
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.ico
+*.svg
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.zip
+*.tar
+*.gz
+*.7z
+*.exe
+*.dll
+*.so
+*.a
+*.o
+*.pdf
+
+# 其他可能的缓存
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

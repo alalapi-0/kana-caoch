@@ -1,3 +1,4 @@
+<!-- 跟读训练页面：播放示例并录音上传获取评分 -->
 <view class="container">
   <view class="sentence">
     <text class="jp">{{currentSentence.jp}}</text>

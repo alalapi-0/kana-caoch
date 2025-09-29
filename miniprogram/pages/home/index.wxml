@@ -1,3 +1,4 @@
+<!-- 首页：展示两个核心功能入口卡片 -->
 <view class="container">
   <view class="title">Kana Coach</view>
   <view class="cards">

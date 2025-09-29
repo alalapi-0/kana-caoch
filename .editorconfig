@@ -1,3 +1,4 @@
+; EditorConfig：统一缩进与换行规则，避免多端协作差异
 root = true
 
 [*]

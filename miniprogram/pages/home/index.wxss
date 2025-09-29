@@ -1,3 +1,8 @@
+/* 首页样式：突出卡片式入口 */
+.container {
+  padding: 48rpx;
+}
+
 .title {
   font-size: 40rpx;
   font-weight: bold;

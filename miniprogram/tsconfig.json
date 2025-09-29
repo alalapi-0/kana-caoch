@@ -5,6 +5,8 @@
     "strict": true,
     "noImplicitAny": false,
     "allowJs": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "types": ["miniprogram-api-typings"],
     "baseUrl": "./",
     "paths": {

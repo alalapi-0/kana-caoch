@@ -1,3 +1,4 @@
+# pnpm 工作区定义：列出前端、后端与共享模块
 packages:
   - "miniprogram"
   - "server"

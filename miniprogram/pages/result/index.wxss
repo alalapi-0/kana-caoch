@@ -1,20 +1,25 @@
+/* 结果页样式：使用卡片展示测验与跟读信息 */
+.container {
+  padding: 48rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
 .title {
   font-size: 36rpx;
   font-weight: bold;
-  margin-bottom: 24rpx;
 }
 
 .item {
   background: #ffffff;
-  margin-bottom: 20rpx;
+  border-radius: 16rpx;
   padding: 24rpx;
-  border-radius: 12rpx;
   display: flex;
   flex-direction: column;
   gap: 8rpx;
 }
 
 .empty {
-  color: #999999;
-  margin-bottom: 20rpx;
+  color: #888;
 }

@@ -1,4 +1,5 @@
-<view class="stars">
+<!-- 星级组件模板：使用 text 元素呈现星形字符，并添加 aria-label 便于辅助功能读取 -->
+<view class="stars" aria-label="评分：{{stars}} / {{max}} 星" role="img">
   <block wx:for="{{range()}}" wx:for-item="item" wx:key="item">
     <text class="star {{item <= stars ? 'filled' : ''}}">★</text>
   </block>

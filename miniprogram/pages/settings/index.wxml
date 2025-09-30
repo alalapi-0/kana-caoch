@@ -1,21 +1,32 @@
-<!-- 设置页：提供语速、播音人占位选择与服务端地址配置 -->
-<view class="container">
-  <view class="section">
-    <text class="label">播音人</text>
-    <picker mode="selector" range="{{voiceOptions}}" value="{{voiceIndex}}" bindchange="onVoiceChange">
-      <view class="picker-value">{{voiceOptions[voiceIndex]}}</view>
-    </picker>
-  </view>
-  <view class="section">
-    <text class="label">语速</text>
-    <picker mode="selector" range="{{speedOptions}}" value="{{speedIndex}}" bindchange="onSpeedChange">
-      <view class="picker-value">{{speedOptions[speedIndex]}}</view>
-    </picker>
-  </view>
-  <view class="section">
-    <text class="label">后端地址</text>
-    <input class="input" value="{{baseUrl}}" bindinput="onBaseUrlInput" placeholder="例如 http://localhost:3000" />
-    <button size="mini" bindtap="saveBaseUrl">保存地址</button>
-  </view>
-  <view class="tip">* 语速与播音人设置暂未与云端联动，后续版本将接入腾讯云 TTS。</view>
+<!--
+  设置页面：以 Vant Form 呈现语速/音色/自动播放/后端地址配置。
+  语速与音色通过操作表选择，避免引入额外 Picker 组件。
+-->
+<view class="settings-page">
+  <van-form bindsubmit="onSubmit">
+    <view class="settings-card">
+      <view class="settings-title">语音合成设置</view>
+      <van-cell title="播音人" value="{{voiceOptions[voiceIndex]}}" is-link="true" bindtap="pickVoice" />
+      <van-cell title="语速" value="{{speedOptions[speedIndex]}}" is-link="true" bindtap="pickSpeed" />
+      <van-cell title="自动播放示例" border="false">
+        <van-switch slot="right-icon" checked="{{autoPlay}}" bind:change="onAutoPlayChange" size="24" />
+      </van-cell>
+    </view>
+
+    <view class="settings-card">
+      <view class="settings-title">服务端配置</view>
+      <van-field
+        label="Mock 服务地址"
+        value="{{baseUrl}}"
+        placeholder="例如：http://localhost:3000"
+        bind:change="onBaseUrlInput"
+        border="false"
+      />
+      <view class="settings-hint">请在联调前确认服务端已运行并允许本地访问。</view>
+    </view>
+
+    <van-button type="primary" round="true" block="true" form-type="submit">保存设置</van-button>
+  </van-form>
+
+  <van-toast id="van-toast" />
 </view>

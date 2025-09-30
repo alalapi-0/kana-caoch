@@ -22,8 +22,14 @@ router.post('/', async (req, res) => {
     speed?: number;
   };
 
-  if (!text || typeof text !== 'string') {
-    return res.status(400).json({ message: 'text is required' });
+  if (!text || typeof text !== 'string' || !text.trim()) {
+    return res.status(400).json({ code: 400, message: 'text 字段必填', data: null });
+  }
+  if (voiceId !== undefined && typeof voiceId !== 'number') {
+    return res.status(400).json({ code: 400, message: 'voiceId 必须为数字', data: null });
+  }
+  if (speed !== undefined && typeof speed !== 'number') {
+    return res.status(400).json({ code: 400, message: 'speed 必须为数字', data: null });
   }
 
   console.info('[tts-request]', { text, voiceId, speed });
@@ -39,7 +45,17 @@ router.post('/', async (req, res) => {
     console.warn('[tts-mock-fallback]', error);
   }
 
-  res.json({ url, durationMs: 2000, voiceId, speed });
+  res.setHeader('Cache-Control', 'no-store');
+  res.json({
+    code: 0,
+    message: 'ok',
+    data: {
+      url,
+      durationMs: 2000,
+      voiceId,
+      speed,
+    },
+  });
 });
 
 export default router;

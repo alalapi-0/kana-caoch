@@ -1,25 +1,88 @@
-/* 结果页样式：使用卡片展示测验与跟读信息 */
-.container {
-  padding: 48rpx;
+/*
+ * 结果页样式：使用多卡片布局与柔和背景突出复盘体验。
+ */
+.result-page {
+  padding: 40rpx;
+  background: linear-gradient(180deg, #ecfeff 0%, #cffafe 100%);
+  min-height: 100vh;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 24rpx;
+  gap: 32rpx;
 }
 
-.title {
-  font-size: 36rpx;
-  font-weight: bold;
-}
-
-.item {
+.summary-card,
+.detail-card {
   background: #ffffff;
-  border-radius: 16rpx;
-  padding: 24rpx;
-  display: flex;
-  flex-direction: column;
-  gap: 8rpx;
+  border-radius: 28rpx;
+  box-shadow: 0 16rpx 40rpx rgba(14, 116, 144, 0.15);
+  padding: 32rpx;
 }
 
-.empty {
-  color: #888;
+.summary-metrics {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24rpx;
+}
+
+.summary-metric {
+  flex: 1;
+  text-align: center;
+}
+
+.summary-value {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.summary-label {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #64748b;
+}
+
+.summary-progress {
+  margin-top: 24rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 16rpx;
+}
+
+.detail-meta {
+  margin: 12rpx 0;
+  display: flex;
+  gap: 12rpx;
+}
+
+.wrong-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.wrong-item {
+  font-size: 26rpx;
+  color: #475569;
+  padding: 8rpx 0;
+}
+
+.detail-target {
+  font-size: 24rpx;
+  color: #0f172a;
+  background: #f0f9ff;
+  border-radius: 16rpx;
+  padding: 12rpx;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-bottom: 40rpx;
 }

@@ -1,0 +1,10 @@
+<!--
+  迷你柱状图模板：包含标题、Canvas 绘图区与占位提示。
+  Canvas 使用 type="2d" 以启用小程序新版绘图上下文，可更好适配高清屏。
+-->
+<view class="mini-bars">
+  <view class="mini-bars__title">{{title}}</view>
+  <canvas type="2d" id="mini-bars-canvas" class="mini-bars__canvas"></canvas>
+  <view wx:if="{{loading}}" class="mini-bars__placeholder">数据加载中，请稍候…</view>
+  <view wx:elif="{{!loading && !stats.length}}" class="mini-bars__placeholder">暂无可视化数据</view>
+</view>

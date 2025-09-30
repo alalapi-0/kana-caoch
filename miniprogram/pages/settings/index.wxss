@@ -1,37 +1,36 @@
-/* 设置页样式：分块展示各项配置 */
-.container {
-  padding: 48rpx;
+/*
+ * 设置页样式：保持卡片结构与柔和色彩，提升操作聚焦度。
+ */
+.settings-page {
+  padding: 40rpx;
+  background: linear-gradient(180deg, #fdf2f8 0%, #fce7f3 100%);
+  min-height: 100vh;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 32rpx;
+  gap: 24rpx;
 }
 
-.section {
+.settings-card {
   background: #ffffff;
-  border-radius: 16rpx;
-  padding: 24rpx;
+  border-radius: 28rpx;
+  box-shadow: 0 16rpx 36rpx rgba(244, 114, 182, 0.2);
+  padding: 32rpx 24rpx;
   display: flex;
   flex-direction: column;
-  gap: 16rpx;
+  gap: 12rpx;
 }
 
-.label {
-  font-weight: bold;
+.settings-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #831843;
 }
 
-.picker-value {
-  padding: 16rpx;
-  border: 1rpx solid #ddd;
-  border-radius: 12rpx;
-}
-
-.input {
-  border: 1rpx solid #ddd;
-  border-radius: 12rpx;
-  padding: 20rpx;
-}
-
-.tip {
-  color: #888;
-  font-size: 26rpx;
+.settings-hint {
+  font-size: 24rpx;
+  color: #9d174d;
+  background: #fdf2f8;
+  border-radius: 16rpx;
+  padding: 12rpx 16rpx;
 }

@@ -1,11 +1,8 @@
-/* 星级组件样式：通过颜色区分选中与未选中状态 */
+/*
+ * 星级组件样式。
+ * 由于内部渲染 Vant Rate，此处仅负责容器布局与外边距，颜色交由 Vant 控制。
+ */
 .stars {
   display: flex;
-  gap: 8rpx;
-  color: #d3d3d3;
-  font-size: 32rpx;
-}
-
-.star.filled {
-  color: #f5b700;
+  align-items: center;
 }

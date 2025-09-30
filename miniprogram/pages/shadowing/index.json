@@ -1,6 +1,11 @@
 {
   "navigationBarTitleText": "跟读训练",
   "usingComponents": {
+    "van-cell": "@vant/weapp/cell/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-progress": "@vant/weapp/progress/index",
+    "van-toast": "@vant/weapp/toast/index",
     "star-rating": "/components/star-rating/index"
   }
 }

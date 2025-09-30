@@ -1,6 +1,8 @@
-<!-- 星级组件模板：使用 text 元素呈现星形字符，并添加 aria-label 便于辅助功能读取 -->
-<view class="stars" aria-label="评分：{{stars}} / {{max}} 星" role="img">
-  <block wx:for="{{range()}}" wx:for-item="item" wx:key="item">
-    <text class="star {{item <= stars ? 'filled' : ''}}">★</text>
-  </block>
+<!--
+  星级组件模板：内部实际渲染 Vant Rate，保持一层封装便于未来更换 UI 库。
+  由于使用了 Vant 内置样式，此处仅保留必要的容器，aria-label 用于辅助功能。
+-->
+<view class="stars" aria-label="评分：{{displayStars}} / {{max}} 星" role="img">
+  <van-rate readonly="true" value="{{displayStars}}" count="{{max}}" size="{{size}}" color="#fa5151"
+    void-color="#ebedf0" allow-half="true" />
 </view>

@@ -1,27 +1,59 @@
-<!-- 五十音测验页面：输入罗马音并即时给出星级反馈 -->
-<view class="container">
-  <view class="progress">第 {{index + 1}} / {{total}} 题</view>
-  <view class="question-card" wx:if="{{current}}">
-    <text class="kana">{{current.kana}}</text>
-    <text class="hint">请输入对应的罗马音</text>
-  </view>
-  <input
-    class="input"
-    value="{{userInput}}"
-    placeholder="例如：ka"
-    bindinput="onInput"
-    confirm-type="done"
-  />
-  <button type="primary" bindtap="submit">提交答案</button>
-  <button type="default" bindtap="goResult" open-type="">查看历史</button>
+<!--
+  五十音测验结构说明：
+  - 顶部使用 Cell 展示进度信息；
+  - 题目卡片包含假名、提示与进度条；
+  - Vant Form + Field 提供输入校验；
+  - 结果区以卡片列出每题详情和星级。
+-->
+<view class="quiz-page">
+  <van-cell-group inset="true" class="quiz-header">
+    <van-cell
+      title="题目进度"
+      value="{{current ? index + 1 : total}} / {{total}}"
+      label="请填写对应罗马音"
+      border="false"
+    />
+  </van-cell-group>
 
-  <view class="result" wx:if="{{results.length}}">
-    <view class="result-title">最近一次反馈</view>
-    <view class="result-body">
-      <text>假名：{{results[results.length - 1].kana}} → {{results[results.length - 1].romaji}}</text>
-      <text>你的输入：{{results[results.length - 1].user || '（未填写）'}}</text>
-      <text>准确率：{{(results[results.length - 1].accuracy * 100).toFixed(0)}}%</text>
-      <star-rating stars="{{results[results.length - 1].stars}}"></star-rating>
-    </view>
+  <view class="quiz-card">
+    <view class="quiz-kana" wx:if="{{current}}">{{current.kana}}</view>
+    <view class="quiz-kana quiz-kana--complete" wx:else>全部完成 🎉</view>
+    <view class="quiz-hint">标准答案：{{current ? current.romaji : '请前往结果页查看'}} </view>
+    <van-progress percentage="{{progressPercent}}" stroke-width="8" />
   </view>
+
+  <van-form bindsubmit="submit" class="quiz-form">
+    <van-field
+      label="罗马音"
+      placeholder="请输入答案，例如 ka"
+      value="{{userInput}}"
+      bind:change="onFieldChange"
+      error-message="{{fieldError}}"
+      border="false"
+    />
+    <view class="quiz-actions">
+      <van-button round="true" block="true" type="primary" form-type="submit">提交答案</van-button>
+      <van-button round="true" block="true" type="default" bindtap="goResult">查看结果</van-button>
+    </view>
+  </van-form>
+
+  <view class="quiz-results" wx:if="{{results.length}}">
+    <view class="quiz-results__title">本次作答记录</view>
+    <block wx:for="{{results}}" wx:key="{{item.kana}}-{{index}}">
+      <view class="quiz-result-card">
+        <van-cell
+          title="{{item.kana}} → {{item.romaji}}"
+          label="你的答案：{{item.user || '未填写'}}"
+          border="false"
+        />
+        <view class="quiz-result-meta">
+          <text>准确率 {{(item.accuracy * 100).toFixed(0)}}%</text>
+          <text>编辑距离 {{item.distance}}</text>
+        </view>
+        <star-rating stars="{{item.stars}}" />
+      </view>
+    </block>
+  </view>
+
+  <van-toast id="van-toast" />
 </view>

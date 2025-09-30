@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "dependencies": {},
+  "dependencies": {
+    "@vant/weapp": "^1.11.6"
+  },
   "devDependencies": {
     "miniprogram-api-typings": "^4.0.3"
   }

@@ -1,6 +1,11 @@
 {
-  "navigationBarTitleText": "结果",
+  "navigationBarTitleText": "练习结果",
   "usingComponents": {
+    "van-cell": "@vant/weapp/cell/index",
+    "van-progress": "@vant/weapp/progress/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-button": "@vant/weapp/button/index",
+    "mini-bars": "/components/mini-bars/index",
     "star-rating": "/components/star-rating/index"
   }
 }

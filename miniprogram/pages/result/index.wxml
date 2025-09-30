@@ -1,26 +1,73 @@
-<!-- 结果页：根据不同类型展示测验或跟读成绩 -->
-<view class="container">
-  <view wx:if="{{type === 'kana'}}">
-    <view class="title">测验结果</view>
-    <block wx:for="{{kanaResults}}" wx:key="kana">
-      <view class="item">
-        <text>{{item.kana}} → {{item.romaji}}</text>
-        <text>你的输入：{{item.user || '（未填写）'}}</text>
-        <text>准确率：{{(item.accuracy * 100).toFixed(0)}}%</text>
-        <star-rating stars="{{item.stars}}"></star-rating>
+<!--
+  结果页结构：总结卡片 → 五十音详情 → 跟读详情 → 近 7 天趋势 → 操作按钮。
+  通过 Vant 组件与自定义卡片组合，突出关键信息与可视化反馈。
+-->
+<view class="result-page">
+  <view class="summary-card">
+    <van-cell title="本次累计星数" value="{{summary.totalStars}}" border="false" />
+    <view class="summary-metrics">
+      <view class="summary-metric">
+        <text class="summary-value">{{(summary.avgAccuracy * 100).toFixed(1)}}%</text>
+        <text class="summary-label">平均准确率</text>
+      </view>
+      <view class="summary-metric">
+        <text class="summary-value">{{summary.shadowingScorePercent !== null ? summary.shadowingScorePercent + '%' : '--'}}</text>
+        <text class="summary-label">跟读得分</text>
+      </view>
+      <view class="summary-metric">
+        <text class="summary-value">{{overview ? overview.streak : 0}}</text>
+        <text class="summary-label">连续天数</text>
+      </view>
+    </view>
+    <view class="summary-progress" wx:if="{{overview}}">
+      <van-progress percentage="{{overview.todayPercent}}" stroke-width="10" show-pivot="true" pivot-text="今日完成 {{overview.todayPercent}}%" />
+    </view>
+  </view>
+
+  <view class="section" wx:if="{{kanaResults.length}}">
+    <view class="section-title">五十音测验详情</view>
+    <block wx:for="{{kanaResults}}" wx:key="{{item.kana}}-{{index}}">
+      <view class="detail-card">
+        <van-cell title="{{item.kana}} → {{item.romaji}}" label="你的答案：{{item.user || '未填写'}}" border="false" />
+        <view class="detail-meta">
+          <van-tag type="primary">准确率 {{(item.accuracy * 100).toFixed(0)}}%</van-tag>
+          <van-tag type="warning">编辑距离 {{item.distance}}</van-tag>
+        </view>
+        <star-rating stars="{{item.stars}}" />
       </view>
     </block>
-    <view class="empty" wx:if="{{!kanaResults.length}}">暂无测验记录，请先完成练习。</view>
-  </view>
-  <view wx:elif="{{type === 'shadowing'}}">
-    <view class="title">跟读成绩</view>
-    <view class="item" wx:if="{{shadowingResult}}">
-      <text>识别文本：{{shadowingResult.text}}</text>
-      <text>得分：{{(shadowingResult.score * 100).toFixed(0)}}%</text>
-      <star-rating stars="{{shadowingResult.stars}}"></star-rating>
-      <text wx:if="{{shadowingResult.confidence}}">置信度：{{(shadowingResult.confidence * 100).toFixed(0)}}%</text>
+    <view class="detail-card" wx:if="{{summary.wrongList.length}}">
+      <view class="wrong-title">错词复盘</view>
+      <block wx:for="{{summary.wrongList}}" wx:key="{{item.kana}}-{{index}}">
+        <view class="wrong-item">
+          <text>{{item.kana}}：正确 {{item.expected}} ｜ 你的输入 {{item.actual}}</text>
+        </view>
+      </block>
     </view>
-    <view class="empty" wx:else>暂无记录，请先完成跟读训练。</view>
   </view>
-  <button bindtap="goHome">返回首页</button>
+
+  <view class="section" wx:if="{{shadowingResult}}">
+    <view class="section-title">跟读训练反馈</view>
+    <view class="detail-card">
+      <van-cell title="识别文本" label="{{shadowingResult.text}}" border="false" />
+      <view class="detail-meta">
+        <van-tag type="warning">WER {{((summary.wer || 0) * 100).toFixed(1)}}%</van-tag>
+        <van-tag type="success">编辑距离 {{summary.distance !== null ? summary.distance : 0}}</van-tag>
+      </view>
+      <van-progress
+        percentage="{{summary.shadowingScorePercent || 0}}"
+        stroke-width="10"
+        pivot-text="得分 {{summary.shadowingScorePercent || 0}}%"
+      />
+      <star-rating stars="{{shadowingResult.stars}}" />
+      <view class="detail-target" wx:if="{{shadowingResult.target}}">目标文本：{{shadowingResult.target}}</view>
+    </view>
+  </view>
+
+  <mini-bars stats="{{dailyStats}}" loading="{{loadingDaily}}" title="近 7 天练习趋势" />
+
+  <view class="actions">
+    <van-button type="primary" round="true" block="true" bindtap="practiceAgain">再次练习</van-button>
+    <van-button type="default" round="true" block="true" bindtap="goHome">返回首页</van-button>
+  </view>
 </view>

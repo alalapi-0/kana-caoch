@@ -5,7 +5,7 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import { scoreUtterance } from '../lib/score.js';
+import { levenshtein, scoreUtterance } from '../lib/score.js';
 import { recognizeSpeech } from '../services/tencent/asr.js';
 
 const upload = multer({ storage: multer.memoryStorage() });
@@ -20,7 +20,7 @@ const router = Router();
  */
 router.post('/recognize', upload.single('audio'), async (req, res) => {
   if (!req.file) {
-    return res.status(400).json({ message: 'audio file is required' });
+    return res.status(400).json({ code: 400, message: 'audio 文件必传', data: null });
   }
 
   try {
@@ -30,18 +30,25 @@ router.post('/recognize', upload.single('audio'), async (req, res) => {
     const recognition = await recognizeSpeech(req.file.buffer, { lang, targetText: target });
     const recognizedText = recognition.text;
     const { wer, stars, score } = scoreUtterance(target || recognizedText, recognizedText);
+    const distance = levenshtein(target || recognizedText, recognizedText);
 
+    res.setHeader('Cache-Control', 'no-store');
     res.json({
-      text: recognizedText,
-      confidence: recognition.confidence,
-      score,
-      stars,
-      wer,
-      target,
+      code: 0,
+      message: 'ok',
+      data: {
+        text: recognizedText,
+        confidence: recognition.confidence,
+        score,
+        stars,
+        wer,
+        target,
+        distance,
+      },
     });
   } catch (error) {
     console.error('[asr-error]', error);
-    res.status(500).json({ message: 'recognition failed' });
+    res.status(500).json({ code: 500, message: 'recognition failed', data: null });
   }
 });
 

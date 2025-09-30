@@ -1,12 +1,51 @@
-<!-- 首页：展示两个核心功能入口卡片 -->
-<view class="container">
-  <view class="title">Kana Coach</view>
-  <view class="cards">
-    <block wx:for="{{cards}}" wx:key="title">
-      <view class="card" data-target="{{item.target}}" bindtap="navigate">
-        <text class="card-title">{{item.title}}</text>
-        <text class="card-desc">{{item.description}}</text>
-      </view>
-    </block>
+<!--
+  首页整体结构：包含头部问候、功能入口网格、今日进度卡片以及 7 日趋势图。
+  所有卡片均采用 Vant 组件组合，并搭配自定义样式实现卡片化效果。
+-->
+<view class="home-page">
+  <view class="home-hero">
+    <view class="home-title">Kana Coach</view>
+    <view class="home-subtitle">假名测验与跟读训练的每日助手</view>
+    <van-button size="small" type="primary" plain="true" bindtap="loadProgress">刷新进度</van-button>
   </view>
+
+  <van-grid column-num="2" border="false" square="false" class="home-grid">
+    <van-grid-item wx:for="{{entries}}" wx:key="title" data-target="{{item.target}}" bindtap="navigate">
+      <view class="grid-card">
+        <view class="grid-icon">{{item.icon}}</view>
+        <view class="grid-title">{{item.title}}</view>
+        <view class="grid-desc">{{item.description}}</view>
+        <van-button size="small" type="primary">立即进入</van-button>
+      </view>
+    </van-grid-item>
+  </van-grid>
+
+  <view class="home-card">
+    <van-cell
+      title="今日进度"
+      value="{{overview ? overview.todayPercent + '%': '--'}}"
+      label="连续打卡 {{overview ? overview.streak : 0}} 天"
+      border="false"
+    />
+    <view class="home-progress">
+      <van-progress percentage="{{overview ? overview.todayPercent : 0}}" stroke-width="10" show-pivot="true" />
+      <view wx:if="{{loadingProgress}}" class="home-progress__loading">同步中…</view>
+    </view>
+    <view class="home-stats" wx:if="{{overview}}">
+      <view class="home-stat">
+        <view class="home-stat__value">{{overview.quizCount}}</view>
+        <view class="home-stat__label">测验题</view>
+      </view>
+      <view class="home-stat">
+        <view class="home-stat__value">{{overview.shadowingCount}}</view>
+        <view class="home-stat__label">跟读次数</view>
+      </view>
+      <view class="home-stat">
+        <view class="home-stat__value">{{overview.totalStars}}</view>
+        <view class="home-stat__label">累计星数</view>
+      </view>
+    </view>
+  </view>
+
+  <mini-bars stats="{{miniBarStats}}" loading="{{loadingProgress}}" title="近 7 天练习与星级" />
 </view>

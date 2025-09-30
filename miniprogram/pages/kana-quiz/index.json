@@ -1,6 +1,13 @@
 {
   "navigationBarTitleText": "五十音测验",
   "usingComponents": {
+    "van-form": "@vant/weapp/form/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-progress": "@vant/weapp/progress/index",
+    "van-toast": "@vant/weapp/toast/index",
     "star-rating": "/components/star-rating/index"
   }
 }
